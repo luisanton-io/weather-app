@@ -32,8 +32,8 @@ export default function CitySelector() {
         className="mx-auto"
         classes={{ noOptions: "d-none" }}
         options={!typingCity ? userCities : results}
-        groupBy={(option) =>
-            option.hasOwnProperty('userCity') ? "User Cities" : "Results"
+        groupBy={(city) =>
+            isUserCity(city) ? "User Cities" : "Results"
         }
         getOptionLabel={(option) => option.name || "no"}
         getOptionSelected={(option) => option.id === currentCity!.id}

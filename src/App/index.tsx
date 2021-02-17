@@ -15,7 +15,6 @@ export default () => {
     <StoreProvider store={store}>
       <ThemeProvider theme={theme}>
         <SkinContext.Provider value={[skin, setSkin]}>
-
           <Main />
         </SkinContext.Provider>
       </ThemeProvider>

@@ -41,7 +41,6 @@ video {
   }
 
   video {
-    /* height: 50vh; */
     height: -webkit-fill-available;
   }
 }
