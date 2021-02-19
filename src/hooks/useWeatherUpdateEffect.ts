@@ -10,13 +10,16 @@ export function useWeatherUpdateEffect(weatherData: WeatherResponse | null) {
     const [skin, setSkin] = useContext(SkinContext)
     const dispatch = useDispatch()
 
-    useEffect(
-        function currentWeatherDidUpdate() {
-            if (!weatherData) return
-            const weatherKey = `${weatherData.current.weather[0].main}_${weatherData.current.weather[0].icon}`
-            setSkin(weatherKey.slice(-1) === 'd' ? Skin.day : Skin.night)
-            isVideoKey(weatherKey) && dispatch(Actions.changeBackground(Video[weatherKey]))
-        },
+    useEffect(() => {
+        if (!weatherData) return
+
+        const weatherKey = `${weatherData.current.weather[0].main}_${weatherData.current.weather[0].icon}`
+        setSkin(weatherKey.slice(-1) === 'd' ? Skin.day : Skin.night)
+
+        //console.log({ weatherKey, isVideoKey: isVideoKey(weatherKey) })
+
+        isVideoKey(weatherKey) && dispatch(Actions.changeBackground(Video[weatherKey]))
+    },
         [weatherData]
     )
 }

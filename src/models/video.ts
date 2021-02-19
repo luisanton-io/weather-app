@@ -15,6 +15,7 @@ export enum Video {
     Clouds_04n = "https://res.cloudinary.com/medusa-cloud/video/upload/v1613589936/weather/night-clouds_1_ruxqml.mp4",
 
     Snow_13d = "https://res.cloudinary.com/medusa-cloud/video/upload/v1613503288/weather/snow_1_ygnsu5.mp4",
+    Snow_13n = "https://res.cloudinary.com/medusa-cloud/video/upload/v1613503288/weather/snow_1_ygnsu5.mp4",
 
     Rain_10d = "https://res.cloudinary.com/medusa-cloud/video/upload/v1613503351/weather/rain_1_yyev7b.mp4",
     Rain_10n = "https://res.cloudinary.com/medusa-cloud/video/upload/v1613503351/weather/rain_1_yyev7b.mp4",
@@ -24,9 +25,12 @@ export enum Video {
     Rain_09n = "https://res.cloudinary.com/medusa-cloud/video/upload/v1613503351/weather/rain_1_yyev7b.mp4",
 
     Drizzle_09d = "https://res.cloudinary.com/medusa-cloud/video/upload/v1613503272/weather/drizzle_1_isfz3d.mp4",
+    Drizzle_09n = "https://res.cloudinary.com/medusa-cloud/video/upload/v1613503272/weather/drizzle_1_isfz3d.mp4",
 
     Fog_50d = "https://res.cloudinary.com/medusa-cloud/video/upload/v1613503360/weather/fog_ac0tpz.mp4",
-    Mist_50d = "https://res.cloudinary.com/medusa-cloud/video/upload/v1613503360/weather/fog_ac0tpz.mp4"
+    Fog_50n = "https://res.cloudinary.com/medusa-cloud/video/upload/v1613503360/weather/fog_ac0tpz.mp4",
+    Mist_50d = "https://res.cloudinary.com/medusa-cloud/video/upload/v1613503360/weather/fog_ac0tpz.mp4",
+    Mist_50n = "https://res.cloudinary.com/medusa-cloud/video/upload/v1613503360/weather/fog_ac0tpz.mp4"
 }
 
 export const isVideoKey = (key: string): key is (keyof typeof Video) => {
