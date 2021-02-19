@@ -50,8 +50,6 @@ export interface CurrentWeather {
     pop?: number;
 }
 
-export type WeatherMain = keyof typeof Video
-
 export interface WeatherSummary {
     id: number;
     main: string;

@@ -26,12 +26,19 @@ export default function CitySelector() {
 
     const [typingCity, setTypingCity] = useState('')
 
-    const cityOptions: Array<UserCity | ResultCity> = [...userCities, ...results]
-    console.log(cityOptions)
+    const cityOptions: Array<UserCity | ResultCity> = [
+        ...userCities.filter(city =>
+            city.name.toLocaleLowerCase().includes(typingCity.toLocaleLowerCase())
+        ),
+        ...results.filter(city => !userCities.some(userCity => userCity.id === city.id))
+    ]
+
+    //console.log(cityOptions)
+
     return <Autocomplete
         className="mx-auto"
         classes={{ noOptions: "d-none" }}
-        options={!typingCity ? userCities : results}
+        options={!typingCity ? userCities : cityOptions}
         groupBy={(city) =>
             isUserCity(city) ? "User Cities" : "Results"
         }
@@ -53,11 +60,17 @@ export default function CitySelector() {
             if (!event) return
 
             setLoadingResults(true)
+
             stackRequest(async () => {
-                const { list } = await API.getCities(newValue)
-                console.log(list)
-                setResults(list)
-                setLoadingResults(false)
+                try {
+                    newValue.length > 2 && setResults(
+                        (await API.getCities(newValue)).list
+                    )
+                } catch (error) {
+                    console.error(error)
+                } finally {
+                    setLoadingResults(false)
+                }
             })
 
             setTypingCity(newValue)

@@ -29,7 +29,8 @@ export default function Main() {
 
     useWeatherUpdateEffect(weatherData)
 
-    console.log(weatherData)
+    // console.log(weatherData)
+
     return (<>
         <VideoBackground />
         <Container className={`${skin ? classes.darkSkin : ''}`}>
