@@ -34,7 +34,7 @@ export default function WeatherDisplay({ weatherData }: { weatherData: WeatherRe
                         <strong className="d-inline-block w-50">{currentCity.name}, {currentCity.sys.country}</strong>
                         <span className="text-muted d-block">{capitalized(weatherData.current.weather[0].description)}</span>
                     </div>
-                    <Button className={classes.changeBtn} onClick={() => dispatch(Actions.resetCurrent())}>Change</Button>
+                    <Button className={classes.changeBtn} onClick={() => dispatch(Actions.resetCurrentCity())}>Change</Button>
                 </Col>
                 <TodaysWeather current={weatherData.current} daily={weatherData.daily[0]} tzOffset={weatherData.timezone_offset} />
                 {

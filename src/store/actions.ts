@@ -10,9 +10,9 @@ type ActionType = keyof typeof Actions;
 export type Action = ReturnType<typeof Actions[ActionType]>;
 
 export const Actions = {
-  add: (city: UserCity) => makeAction("add", city),
-  remove: (id: number) => makeAction("remove", id),
-  setCurrent: (city: UserCity) => makeAction("setCurrent", city),
-  resetCurrent: () => makeAction("resetCurrent"),
+  addCity: (city: UserCity) => makeAction("addCity", city),
+  removeCity: (id: number) => makeAction("removeCity", id),
+  setCurrentCity: (city: UserCity) => makeAction("setCurrentCity", city),
+  resetCurrentCity: () => makeAction("resetCurrentCity"),
   changeBackground: (video: Video) => makeAction("changeBackground", video)
 };

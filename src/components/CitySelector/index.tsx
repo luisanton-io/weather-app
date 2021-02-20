@@ -38,7 +38,7 @@ export default function CitySelector() {
     return <Autocomplete
         className="mx-auto"
         classes={{ noOptions: "d-none" }}
-        options={!typingCity ? userCities : cityOptions}
+        options={typingCity ? cityOptions : userCities}
         groupBy={(city) =>
             isUserCity(city) ? "User Cities" : "Results"
         }
@@ -53,25 +53,20 @@ export default function CitySelector() {
                     ? city
                     : new UserCity(city)
 
-            !isUserCity(city) && dispatch(Actions.add(selectedCity))
-            dispatch(Actions.setCurrent(selectedCity))
+            !isUserCity(city) && dispatch(Actions.addCity(selectedCity))
+            dispatch(Actions.setCurrentCity(selectedCity))
         }}
         onInputChange={(event, newValue) => {
-            if (!event) return
+            if (event.nativeEvent.type === "click") return
 
             setLoadingResults(true)
 
-            stackRequest(async () => {
-                try {
-                    newValue.length > 2 && setResults(
-                        (await API.getCities(newValue)).list
-                    )
-                } catch (error) {
-                    console.error(error)
-                } finally {
-                    setLoadingResults(false)
-                }
-            })
+            newValue.length > 2 && stackRequest(() =>
+                API.getCities(newValue)
+                    .then(({ list }) => setResults(list))
+                    .catch(error => console.error(error))
+                    .finally(() => setLoadingResults(false))
+            )
 
             setTypingCity(newValue)
         }}
@@ -106,10 +101,15 @@ export default function CitySelector() {
                     <strong className="mx-2">{city.name}, <span className="text-muted">{city.sys.country}</span></strong>
                     <span className="text-muted">{city.weather[0].main}</span>
                 </Col>
-                {isUserCity(city) && <CloseIcon className="ml-auto my-auto mr-2" onClick={(event) => {
-                    event.stopPropagation();
-                    dispatch(Actions.remove(city.id))
-                }} />}
+                {
+                    isUserCity(city) &&
+                    <CloseIcon
+                        className="ml-auto my-auto mr-2"
+                        onClick={(event) => {
+                            event.stopPropagation();
+                            dispatch(Actions.removeCity(city.id))
+                        }} />
+                }
             </Row>
         </>}
     />

@@ -70,7 +70,7 @@ export default function TodaysWeather({ current: { temp,
                 ))
             }
         </Col>
-        <Col xs={2} md={3} className="d-flex my-3 pr-md-4 flex-column justify-content-around align-items-end">
+        <Col xs={2} md={3} className="d-flex my-3 pr-2 pr-md-4 flex-column justify-content-around align-items-end">
             <div className="text-center">
                 <WbSunnyIcon className="d-block mx-auto" />
                 <div className="mx-auto">

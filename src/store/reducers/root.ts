@@ -2,32 +2,41 @@ import { Store } from "..";
 import { Video } from "../../models/video"
 import { Action } from "../actions";
 
-export const initialStore: Store = localStorage.getItem('STORE')
-    ? JSON.parse(localStorage.getItem('STORE')!) as Store
-    : {
-        videoBackground: Video.Clear_01d,
-        cities: []
-    };
+const local = {
+    get store() {
+        return localStorage.getItem("STORE")
+            ? JSON.parse(localStorage.getItem("STORE")!) as Store
+            : {
+                videoBackground: Video.Clear_01d,
+                cities: []
+            }
+    },
+    set store(newStore: Store) {
+        localStorage.setItem("STORE", JSON.stringify(newStore))
+    }
+}
+
+export const initialStore: Store = local.store
 
 export default function rootReducer(store = initialStore, action: Action): Store {
-    const newStore: Store = (() => {
+    local.store = (() => {
         switch (action.type) {
-            case "add":
+            case "addCity":
                 return {
                     ...store,
                     cities: [...store.cities, action.payload]
                 };
-            case "remove":
+            case "removeCity":
                 return {
                     ...store,
                     cities: store.cities.filter(city => city.id !== action.payload)
                 };
-            case "setCurrent":
+            case "setCurrentCity":
                 return {
                     ...store,
                     currentCity: action.payload
                 }
-            case "resetCurrent":
+            case "resetCurrentCity":
                 return {
                     ...store,
                     currentCity: undefined
@@ -42,7 +51,5 @@ export default function rootReducer(store = initialStore, action: Action): Store
         }
     })()
 
-    localStorage.setItem('STORE', JSON.stringify(newStore))
-
-    return newStore
+    return local.store
 }

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 export const useRequestStack = () => {
     const [requestTimeout, setRequestTimeout] = useState<NodeJS.Timeout | null>(null)
