@@ -3,12 +3,16 @@ import { useSelector } from 'react-redux'
 import { Store } from '../store'
 
 export default function VideoBackground() {
-    const video = createRef<HTMLVideoElement>()
+    const videoRef = createRef<HTMLVideoElement>()
     const source = useSelector((store: Store) => store.videoBackground)
 
-    useEffect(() => { video.current!.playbackRate = 1.5 }, [])
+    useEffect(() => {
+        const { current: video } = videoRef
+        video!.playbackRate = 1.5
+        video!.muted = true
+    }, [])
 
     return (
-        <video ref={video} autoPlay muted loop playsInline src={source} />
+        <video ref={videoRef} autoPlay loop playsInline src={source} />
     )
 }
