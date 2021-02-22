@@ -9,7 +9,7 @@ export default function VideoBackground() {
     useEffect(() => {
         const { current: video } = videoRef
         video!.playbackRate = 1.5
-        video!.muted = true
+        video && (video.muted = true)
     }, [])
 
     return (
