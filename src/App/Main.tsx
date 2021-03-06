@@ -25,7 +25,7 @@ export default function Main() {
             API.getWeather(currentCity)
                 .then(data => setWeatherData(data))
                 .catch(error => console.error(error))
-    }, [currentCity])
+    }, [JSON.stringify(currentCity)])
 
     useWeatherUpdateEffect(weatherData)
 
