@@ -16,10 +16,8 @@ export function useWeatherUpdateEffect(weatherData: WeatherResponse | null) {
         const weatherKey = `${weatherData.current.weather[0].main}_${weatherData.current.weather[0].icon}`
         setSkin(weatherKey.slice(-1) === 'd' ? Skin.day : Skin.night)
 
-        //console.log({ weatherKey, isVideoKey: isVideoKey(weatherKey) })
-
         isVideoKey(weatherKey) && dispatch(Actions.changeBackground(Video[weatherKey]))
     },
-        [weatherData]
+        [JSON.stringify(weatherData)]
     )
 }
